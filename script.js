@@ -222,6 +222,7 @@ function renderView() {
   const meta = VIEW_META[state.activeView] || VIEW_META.home;
 
   document.body.className = meta.theme;
+  byId('pageTitle').textContent = meta.title;
   byId('pageTitle').classList.toggle('is-letter-title', state.activeView === 'home');
   byId('pageSubtitle').textContent = meta.subtitle;
   byId('backBtn').hidden = state.activeView === 'home';
