@@ -43,7 +43,7 @@ const VIEW_META = {
   },
   addiction: {
     title: 'Работа с зависимостью',
-    subtitle: 'Здесь собрано все в одном месте чтобы справится с тягой , состояние срыва, восстановление после употребления, мотивация и пр.',
+    subtitle: 'Здесь собрано все в одном месте чтобы справиться с тягой, состоянием срыва, восстановлением после употребления, мотивацией и другими важными моментами.',
     theme: 'theme-start'
   }
 };
@@ -69,36 +69,30 @@ function escapeHtml(value = '') {
     .replaceAll("'", '&#039;');
 }
 
-function cardForItem(item) {
+function listItem(item) {
   return `
-    <a class="item-card" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
-      <div class="item-topline">
-        <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
-      </div>
-      <div class="item-title">${escapeHtml(item.title)}</div>
-      ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''}
+    <a class="list-item" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
+      <span class="list-item-title">${escapeHtml(item.title)}</span>
+      <span class="list-item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
     </a>
   `;
 }
 
-function cardForPathItem(item) {
+function pathListItem(item) {
   const progressKey = `progress_${item.id}`;
   const checked = localStorage.getItem(progressKey) === '1';
 
   return `
-    <div class="item-card-wrap">
-      <a class="item-card ${checked ? 'is-completed' : ''}" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
-        <div class="item-topline">
-          <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
-        </div>
-        <div class="item-title">${escapeHtml(item.title)}</div>
-        ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''}
-      </a>
-
-      <label class="item-check">
+    <div class="list-item-wrap">
+      <label class="list-check">
         <input type="checkbox" data-progress-id="${escapeHtml(item.id)}" ${checked ? 'checked' : ''}>
         <span></span>
       </label>
+
+      <a class="list-item ${checked ? 'is-completed' : ''}" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
+        <span class="list-item-title">${escapeHtml(item.title)}</span>
+        <span class="list-item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
+      </a>
     </div>
   `;
 }
@@ -124,10 +118,10 @@ function plannedPhaseCard(phase) {
 }
 
 function availablePhaseCard(phase) {
-  const cards = (phase.items || [])
+  const items = (phase.items || [])
     .map(id => ITEMS.get(id))
     .filter(Boolean)
-    .map(cardForPathItem)
+    .map(pathListItem)
     .join('');
 
   return `
@@ -140,7 +134,7 @@ function availablePhaseCard(phase) {
         <span class="phase-badge">${(phase.items || []).length} материалов</span>
       </summary>
       <div class="phase-content">
-        <div class="items-grid">${cards}</div>
+        <div class="list-wrap">${items}</div>
       </div>
     </details>
   `;
@@ -188,7 +182,7 @@ function renderFullPath() {
   return `
     <section class="section-heading wide">
       <h3>Полный маршрут</h3>
-      <p>Весь пуь проходит через размышления, лекции, медитации и практики, которые в нужной последовательности открывают знания о себе. Не торопитесь, отмечайте пройденный путь галочками.</p>
+      <p>Весь путь проходит через размышления, лекции, медитации и практики, которые в нужной последовательности открывают знания о себе. Не торопитесь, отмечайте пройденный путь галочками.</p>
     </section>
     <section class="phases-stack">
       ${window.APP_DATA.phases.map(phase => phase.status === 'planned' ? plannedPhaseCard(phase) : availablePhaseCard(phase)).join('')}
@@ -198,10 +192,10 @@ function renderFullPath() {
 
 function renderCurated(viewId) {
   const ids = window.APP_DATA.curated[viewId] || [];
-  const cards = ids
+  const items = ids
     .map(id => ITEMS.get(id))
     .filter(Boolean)
-    .map(cardForItem)
+    .map(listItem)
     .join('');
 
   const introMap = {
@@ -217,7 +211,7 @@ function renderCurated(viewId) {
       <h3>${escapeHtml(VIEW_META[viewId].title)}</h3>
       <p>${escapeHtml(introMap[viewId] || '')}</p>
     </section>
-    <section class="items-grid">${cards}</section>
+    <section class="list-wrap">${items}</section>
   `;
 }
 
@@ -228,9 +222,9 @@ function bindProgressChecks() {
       const key = `progress_${id}`;
       localStorage.setItem(key, event.target.checked ? '1' : '0');
 
-      const card = event.target.closest('.item-card-wrap')?.querySelector('.item-card');
-      if (card) {
-        card.classList.toggle('is-completed', event.target.checked);
+      const listItemNode = event.target.closest('.list-item-wrap')?.querySelector('.list-item');
+      if (listItemNode) {
+        listItemNode.classList.toggle('is-completed', event.target.checked);
       }
     });
   });
