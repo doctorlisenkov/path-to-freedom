@@ -306,9 +306,10 @@ h1 {
 }
 
 .item-card {
+  position: relative;
   display: block;
   border-radius: 20px;
-  padding: 18px;
+  padding: 14px;
   transition: transform .18s ease, border-color .18s ease, background .18s ease;
 }
 .item-card:hover,
@@ -331,10 +332,15 @@ h1 {
   font-weight: 700;
 }
 .item-type {
-  padding: 6px 10px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 9px;
   border-radius: 999px;
   background: rgba(255,255,255,0.08);
   color: var(--muted);
+  font-size: 12px;
+  line-height: 1;
 }
 .item-title {
   font-size: 20px;
