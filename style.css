@@ -308,7 +308,7 @@ h1 {
 .item-card {
   position: relative;
   display: block;
-  border-radius: 20px;
+  border-radius: 18px;
   padding: 14px;
   transition: transform .18s ease, border-color .18s ease, background .18s ease;
 }
@@ -333,24 +333,25 @@ h1 {
 }
 .item-type {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 5px 9px;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
   border-radius: 999px;
   background: rgba(255,255,255,0.08);
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1;
+  font-size: 11px;
 }
 .item-title {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.25;
-  margin-bottom: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 6px;
+  padding-right: 90px;
 }
 .item-desc {
-  line-height: 1.55;
-  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 8px;
 }
 .item-link {
   color: var(--accent);
