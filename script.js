@@ -84,7 +84,7 @@ function pathListItem(item) {
 
   return `
     <div class="list-item-wrap">
-      <label class="list-check">
+      <label class="list-check" aria-label="Отметить как пройденное">
         <input type="checkbox" data-progress-id="${escapeHtml(item.id)}" ${checked ? 'checked' : ''}>
         <span></span>
       </label>
@@ -143,48 +143,61 @@ function availablePhaseCard(phase) {
 function renderHome() {
   const hero = window.APP_DATA.sections.find(section => section.id === 'full-path');
   const secondary = window.APP_DATA.sections.filter(section => section.id !== 'full-path');
+  const topTiles = secondary.slice(0, 4);
+  const bottomTile = secondary[4];
 
   return `
-    <section class="hero-card clickable" data-view="full-path">
-      <div class="hero-kicker">Главный маршрут</div>
-      <h2>${escapeHtml(hero.title)}</h2>
-      <p>${escapeHtml(hero.description)}</p>
-      <button class="primary-btn" data-view="full-path">${escapeHtml(hero.cta || 'Открыть')}</button>
-    </section>
+    <section class="view-shell">
+      <section class="hero-card clickable fade-up fade-1" data-view="full-path">
+        <div class="hero-kicker">Главный маршрут</div>
+        <h2>${escapeHtml(hero.title)}</h2>
+        <p>${escapeHtml(hero.description)}</p>
+        <button class="primary-btn" data-view="full-path">${escapeHtml(hero.cta || 'Открыть')}</button>
+      </section>
 
-    <section class="secondary-grid">
-      ${secondary.map(section => `
-        <article class="mini-card clickable" data-view="${escapeHtml(section.id)}">
-          <div class="mini-title">${escapeHtml(section.title)}</div>
-        </article>
-      `).join('')}
-    </section>
-
-    <section class="roadmap-preview">
-      <div class="section-heading">
-        <h3>Карта проекта</h3>
-        <p>Весь путь можно расширять и наполнять годами, не ломая структуру.</p>
-      </div>
-      <div class="preview-list">
-        ${window.APP_DATA.phases.map((phase, index) => `
-          <div class="preview-row ${phase.status === 'planned' ? 'is-planned' : ''}">
-            <span>${index + 1}. ${escapeHtml(phase.title.replace(/^Этап\s\d+\.\s*/, ''))}</span>
-            <span>${phase.status === 'planned' ? 'в разработке' : 'доступно'}</span>
-          </div>
+      <section class="secondary-grid fade-up fade-2">
+        ${topTiles.map(section => `
+          <article class="mini-card clickable" data-view="${escapeHtml(section.id)}">
+            <div class="mini-title">${escapeHtml(section.title)}</div>
+          </article>
         `).join('')}
-      </div>
+      </section>
+
+      ${bottomTile ? `
+      <section class="wide-tile-wrap fade-up fade-3">
+        <article class="mini-card mini-card-wide clickable" data-view="${escapeHtml(bottomTile.id)}">
+          <div class="mini-title">${escapeHtml(bottomTile.title)}</div>
+        </article>
+      </section>` : ''}
+
+      <section class="roadmap-preview fade-up fade-4">
+        <div class="section-heading">
+          <h3>Карта проекта</h3>
+          <p>Весь путь можно расширять и наполнять годами, не ломая структуру.</p>
+        </div>
+        <div class="preview-list">
+          ${window.APP_DATA.phases.map((phase, index) => `
+            <div class="preview-row ${phase.status === 'planned' ? 'is-planned' : ''}">
+              <span>${index + 1}. ${escapeHtml(phase.title.replace(/^Этап\\s\\d+\\.\\s*/, ''))}</span>
+              <span>${phase.status === 'planned' ? 'в разработке' : 'доступно'}</span>
+            </div>
+          `).join('')}
+        </div>
+      </section>
     </section>
   `;
 }
 
 function renderFullPath() {
   return `
-    <section class="section-heading wide">
-      <h3>Полный маршрут</h3>
-      <p>Весь путь проходит через размышления, лекции, медитации и практики, которые в нужной последовательности открывают знания о себе. Не торопитесь и отмечайте пройденное галочками.</p>
-    </section>
-    <section class="phases-stack">
-      ${window.APP_DATA.phases.map(phase => phase.status === 'planned' ? plannedPhaseCard(phase) : availablePhaseCard(phase)).join('')}
+    <section class="view-shell">
+      <section class="section-heading wide fade-up fade-1">
+        <h3>Полный маршрут</h3>
+        <p>Весь путь проходит через размышления, лекции, медитации и практики, которые в нужной последовательности открывают знания о себе. Не торопитесь и отмечайте пройденное галочками.</p>
+      </section>
+      <section class="phases-stack fade-up fade-2">
+        ${window.APP_DATA.phases.map(phase => phase.status === 'planned' ? plannedPhaseCard(phase) : availablePhaseCard(phase)).join('')}
+      </section>
     </section>
   `;
 }
@@ -198,7 +211,9 @@ function renderCurated(viewId) {
     .join('');
 
   return `
-    <section class="list-wrap">${items}</section>
+    <section class="view-shell">
+      <section class="list-wrap fade-up fade-1">${items}</section>
+    </section>
   `;
 }
 
@@ -217,6 +232,18 @@ function bindProgressChecks() {
   });
 }
 
+function animateContentSwap(root, html) {
+  root.classList.remove('is-visible');
+  requestAnimationFrame(() => {
+    root.innerHTML = html;
+    requestAnimationFrame(() => {
+      root.classList.add('is-visible');
+      bindClicks();
+      bindProgressChecks();
+    });
+  });
+}
+
 function renderView() {
   const root = byId('app');
   const meta = VIEW_META[state.activeView] || VIEW_META.home;
@@ -227,16 +254,16 @@ function renderView() {
   byId('pageSubtitle').textContent = meta.subtitle;
   byId('backBtn').hidden = state.activeView === 'home';
 
+  let html = '';
   if (state.activeView === 'home') {
-    root.innerHTML = renderHome();
+    html = renderHome();
   } else if (state.activeView === 'full-path') {
-    root.innerHTML = renderFullPath();
+    html = renderFullPath();
   } else {
-    root.innerHTML = renderCurated(state.activeView);
+    html = renderCurated(state.activeView);
   }
 
-  bindClicks();
-  bindProgressChecks();
+  animateContentSwap(root, html);
 }
 
 function bindClicks() {
@@ -258,5 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderView();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  const root = byId('app');
+  root.classList.add('app-fade');
   renderView();
 });
