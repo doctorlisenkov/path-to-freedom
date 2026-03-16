@@ -77,9 +77,8 @@ function cardForItem(item) {
   return `
     <a class="item-card" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
       <div class="item-topline">
-        <span class="item-number">#${fmtNumber(item.number)}</span>
-        <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
-      </div>
+  <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
+</div>
       <div class="item-title">${escapeHtml(item.title)}</div>
       ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''}
       <div class="item-link">Открыть в Telegram</div>
