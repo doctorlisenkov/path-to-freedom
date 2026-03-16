@@ -12,18 +12,18 @@ const TYPE_LABELS = {
 
 const VIEW_META = {
   home: {
-    title: 'Путь к свободе',
-    subtitle: 'Главный вход в навигатор. Здесь ты можешь идти по полному маршруту или выбрать более короткий способ входа.',
+    title: 'Дорогой участник!',
+    subtitle: 'Это приложение поможет тебе на пути знакомства с самим собой. Не спеши, иначе не успеешь разглядеть самого важного человека - себя.',
     theme: 'theme-home'
   },
   'full-path': {
     title: 'Полный путь',
-    subtitle: 'Большая карта проекта: пройди этапы последовательно или вернись в нужную точку.',
+    subtitle: 'Выверенный маршрут который очень глубоко, через терни и правду позволит стать свободным.',
     theme: 'theme-path'
   },
   meditations: {
     title: 'Медитации',
-    subtitle: 'Практики для замедления, контакта с собой и выхода в наблюдателя.',
+    subtitle: 'Практики выхода в состояние наблюдателя — в ту точку сознания, из которой человек может по-настоящему увидеть себя.',
     theme: 'theme-meditations'
   },
   lectures: {
@@ -33,17 +33,17 @@ const VIEW_META = {
   },
   practices: {
     title: 'Практики и техники',
-    subtitle: 'Телесные и прикладные инструменты, которые можно брать в жизнь сразу.',
+    subtitle: 'Телесные и прикладные инструменты, которые начинают работать сразу после применения.',
     theme: 'theme-practices'
   },
   materials: {
     title: 'Материалы',
-    subtitle: 'Вспомогательные таблицы, списки и раздаточные опоры.',
+    subtitle: 'Вспомогательные таблицы, списки, практики, чтобы все было в одном месте.',
     theme: 'theme-materials'
   },
-  start: {
-    title: 'С чего начать',
-    subtitle: 'Быстрый мягкий вход в проект, если человек только пришёл и ещё не знает, куда смотреть.',
+  addiction: {
+    title: 'Работа с зависимостью',
+    subtitle: 'Здесь собрано все в одном месте чтобы справится с тягой , состояние срыва, восстановление после употребления, мотивация и пр.',
     theme: 'theme-start'
   }
 };
@@ -60,10 +60,6 @@ function itemMap() {
 
 const ITEMS = itemMap();
 
-function fmtNumber(value) {
-  return String(value).padStart(2, '0');
-}
-
 function escapeHtml(value = '') {
   return String(value)
     .replaceAll('&', '&amp;')
@@ -77,11 +73,33 @@ function cardForItem(item) {
   return `
     <a class="item-card" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
       <div class="item-topline">
-  <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
-</div>
+        <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
+      </div>
       <div class="item-title">${escapeHtml(item.title)}</div>
-      ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''} 
+      ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''}
     </a>
+  `;
+}
+
+function cardForPathItem(item) {
+  const progressKey = `progress_${item.id}`;
+  const checked = localStorage.getItem(progressKey) === '1';
+
+  return `
+    <div class="item-card-wrap">
+      <a class="item-card ${checked ? 'is-completed' : ''}" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
+        <div class="item-topline">
+          <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
+        </div>
+        <div class="item-title">${escapeHtml(item.title)}</div>
+        ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''}
+      </a>
+
+      <label class="item-check">
+        <input type="checkbox" data-progress-id="${escapeHtml(item.id)}" ${checked ? 'checked' : ''}>
+        <span></span>
+      </label>
+    </div>
   `;
 }
 
@@ -109,7 +127,7 @@ function availablePhaseCard(phase) {
   const cards = (phase.items || [])
     .map(id => ITEMS.get(id))
     .filter(Boolean)
-    .map(cardForItem)
+    .map(cardForPathItem)
     .join('');
 
   return `
@@ -170,7 +188,7 @@ function renderFullPath() {
   return `
     <section class="section-heading wide">
       <h3>Полный маршрут</h3>
-      <p>Главный вход в проект. Видны уже готовые этапы и будущие блоки, которые будут раскрываться по мере выхода материалов.</p>
+      <p>Весь пуь проходит через размышления, лекции, медитации и практики, которые в нужной последовательности открывают знания о себе. Не торопитесь, отмечайте пройденный путь галочками.</p>
     </section>
     <section class="phases-stack">
       ${window.APP_DATA.phases.map(phase => phase.status === 'planned' ? plannedPhaseCard(phase) : availablePhaseCard(phase)).join('')}
@@ -191,7 +209,7 @@ function renderCurated(viewId) {
     lectures: 'Отдельный путь для тех, кто любит изучать глубоко и системно.',
     practices: 'Здесь собраны техники, которые можно брать прямо в день и использовать в нужный момент.',
     materials: 'Сюда вынесены таблицы, чек-листы и вспомогательные опоры.',
-    start: 'Мягкий старт для тех, кто только вошёл в пространство проекта.'
+    addiction: 'Здесь собраны материалы для тяги, срыва, восстановления и удержания пути.'
   };
 
   return `
@@ -203,9 +221,23 @@ function renderCurated(viewId) {
   `;
 }
 
+function bindProgressChecks() {
+  document.querySelectorAll('[data-progress-id]').forEach(input => {
+    input.addEventListener('change', (event) => {
+      const id = event.target.dataset.progressId;
+      const key = `progress_${id}`;
+      localStorage.setItem(key, event.target.checked ? '1' : '0');
+
+      const card = event.target.closest('.item-card-wrap')?.querySelector('.item-card');
+      if (card) {
+        card.classList.toggle('is-completed', event.target.checked);
+      }
+    });
+  });
+}
+
 function renderView() {
   const root = byId('app');
-  const hero = byId('pageHero');
   const meta = VIEW_META[state.activeView] || VIEW_META.home;
 
   document.body.className = meta.theme;
@@ -222,6 +254,7 @@ function renderView() {
   }
 
   bindClicks();
+  bindProgressChecks();
 }
 
 function bindClicks() {
