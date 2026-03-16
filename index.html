@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0d1117" />
+  <title>Путь к свободе</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-home">
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div id="brandTitle">Путь к свободе</div>
+      </div>
+      <button class="back-btn" id="backBtn" hidden>← Назад на главную</button>
+    </header>
+
+    <section class="page-hero" id="pageHero">
+      <div class="hero-copy">
+        <div class="kicker">Навигатор проекта</div>
+        <h1 id="pageTitle">Путь к свободе</h1>
+        <p class="page-subtitle" id="pageSubtitle">Главный вход в навигатор. Здесь ты можешь идти по полному маршруту или выбрать более короткий способ входа.</p>
+      </div>
+    </section>
+
+    <main id="app"></main>
+
+    <div class="footer-note">
+      Это первая версия навигатора: её удобно расширять, добавлять новые этапы и обновлять ссылки без перестройки всей системы.
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

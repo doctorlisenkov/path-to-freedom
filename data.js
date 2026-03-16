@@ -1,0 +1,188 @@
+window.APP_DATA = {
+  brand: {
+    title: 'Путь к свободе',
+    subtitle: 'Навигатор внутренней трансформации: от знакомства с собой к опоре, свободе и новой жизни.'
+  },
+  sections: [
+    {
+      id: 'full-path',
+      title: 'Полный путь',
+      kind: 'hero',
+      description: 'Главный маршрут проекта. Иди по этапам, возвращайся к важному, собирай себя в целостную систему.',
+      cta: 'Открыть путь'
+    },
+    {
+      id: 'meditations',
+      title: 'Медитации',
+      kind: 'secondary',
+      description: 'Практики для замедления, контакта с собой, проживания и выхода в наблюдателя.'
+    },
+    {
+      id: 'lectures',
+      title: 'Лекции',
+      kind: 'secondary',
+      description: 'Структурные материалы для тех, кто хочет понимать глубже и собирать внутреннюю карту.'
+    },
+    {
+      id: 'practices',
+      title: 'Практики и техники',
+      kind: 'secondary',
+      description: 'Телесные и прикладные инструменты, когда нужно не только понять, но и сделать.'
+    },
+    {
+      id: 'materials',
+      title: 'Материалы',
+      kind: 'secondary',
+      description: 'Таблицы, чек-листы и вспомогательные опоры для самостоятельной работы.'
+    },
+    {
+      id: 'start',
+      title: 'С чего начать',
+      kind: 'secondary',
+      description: 'Быстрый вход для нового человека: несколько ключевых точек, чтобы войти в путь без перегруза.'
+    }
+  ],
+  phases: [
+    {
+      id: 'phase-1',
+      title: 'Этап 1. Знакомство с собой',
+      description: 'Первый честный взгляд на себя, свою идентичность, внутреннего судью, опору и движение.',
+      status: 'available',
+      items: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+    },
+    {
+      id: 'phase-2',
+      title: 'Этап 2. Моё тело',
+      description: 'Контакт с телом, дыхание, техники регулирования, работа с тягой и телесной глубиной.',
+      status: 'available',
+      items: [17,18,19,20,21,22,23,24,25,26,30]
+    },
+    {
+      id: 'phase-3',
+      title: 'Этап 3. Эмоции и как с ними справляться',
+      description: 'Понимание чувств, запретов на эмоции, контакта с болью, гневом, радостью и грустью.',
+      status: 'available',
+      items: [31,32,33,34,35,36,40,41,42,43,44,45,46]
+    },
+    {
+      id: 'phase-4',
+      title: 'Этап 4. Моя семья',
+      description: 'Семейные паттерны, перенос, сочувствие, контакт с родителями и внутренние механизмы семьи.',
+      status: 'available',
+      items: [47,48,49,50,51]
+    },
+    {
+      id: 'phase-5',
+      title: 'Этап 5. Треугольник Карпмана и роли',
+      description: 'Жертва, спасатель, преследователь, сценарии зависимости в отношениях и выход из ролей.',
+      status: 'planned',
+      topics: ['Треугольник Карпмана', 'Как выходить из ролей', 'Спасательство', 'Жертвенность', 'Контроль и преследование']
+    },
+    {
+      id: 'phase-6',
+      title: 'Этап 6. Созависимые отношения',
+      description: 'Почему мы слипаемся, теряем себя и как возвращать границы, свободу и субъектность.',
+      status: 'planned',
+      topics: ['Зависимые отношения', 'Слияние', 'Границы', 'Страх отвержения', 'Выход из созависимости']
+    },
+    {
+      id: 'phase-7',
+      title: 'Этап 7. Кризисный узел',
+      description: 'Стыд, вина, внутренний критик, оценочное мышление, самоосуждение и давление на себя.',
+      status: 'planned',
+      topics: ['Стыд', 'Вина', 'Внутренний критик', 'Оценочное суждение', 'Перфекционизм']
+    },
+    {
+      id: 'phase-8',
+      title: 'Этап 8. Травма и дефолтная система мозга',
+      description: 'Как психика фиксируется, почему повторяются старые сценарии и что с этим делать.',
+      status: 'planned',
+      topics: ['Травма', 'Защитные механизмы', 'Дефолтная система мозга', 'Повторение сценариев', 'Контакт с болью']
+    },
+    {
+      id: 'phase-9',
+      title: 'Этап 9. Сила против срыва',
+      description: 'Практические и лекционные материалы о тяге, срывах, давлении на себя и восстановлении.',
+      status: 'planned',
+      topics: ['Как работать с тягой', 'Как не давить на себя', 'Что делать после срыва', 'Самонасилие', 'Восстановление']
+    },
+    {
+      id: 'phase-10',
+      title: 'Этап 10. Внутренняя опора и самооценка',
+      description: 'Самоценность, внутренний родитель, внутренний ребёнок, личные границы и проявленность.',
+      status: 'planned',
+      topics: ['Самооценка', 'Внутренний родитель', 'Внутренний ребёнок', 'Проявленность', 'Право быть собой']
+    },
+    {
+      id: 'phase-11',
+      title: 'Этап 11. Манипуляции, депрессия и кризисы',
+      description: 'Влияние, игры, пустота, депрессивные состояния, выгорание и понимание сложных периодов.',
+      status: 'planned',
+      topics: ['Манипуляции', 'Психологические игры', 'Депрессия', 'Пустота', 'Кризис состояния']
+    },
+    {
+      id: 'phase-12',
+      title: 'Этап 12. Созидание и новая жизнь',
+      description: 'Когда человек начинает жить не от боли и избегания, а от ценностей, выбора и созидания.',
+      status: 'planned',
+      topics: ['Ценности', 'Направление жизни', 'Созидание', 'Привычки', 'Новая опора']
+    }
+  ],
+  items: [
+    { id: 1, number: 1, title: 'Честный путь', link: 'https://t.me/c/3734713069/7', type: 'podcast', desc: '' },
+    { id: 2, number: 2, title: 'Чтобы что-то изменить', link: 'https://t.me/c/3734713069/16', type: 'podcast', desc: '' },
+    { id: 3, number: 3, title: 'Заслуживание любви', link: 'https://t.me/c/3734713069/14', type: 'podcast', desc: 'Не занимайся влюблением в образ — смотри глубже.' },
+    { id: 4, number: 4, title: 'Увидеть свою идентичность', link: 'https://t.me/c/3734713069/10', type: 'podcast', desc: '' },
+    { id: 5, number: 5, title: 'Стыд и вина не дают меняться', link: 'https://t.me/c/3734713069/11', type: 'podcast', desc: 'То, что тебя останавливает, нужно сначала увидеть.' },
+    { id: 6, number: 6, title: 'Прощение и боль', link: 'https://t.me/c/3734713069/12', type: 'podcast', desc: 'Найди место боли, не путая её с прощением.' },
+    { id: 7, number: 7, title: 'От чего начинать движение', link: 'https://t.me/c/3734713069/15', type: 'meditation', desc: 'Посмотри на себя с любовью и начни с основания.' },
+    { id: 8, number: 8, title: 'Внутренний судья', link: 'https://t.me/c/3734713069/17', type: 'podcast', desc: 'Увидь, кто внутри тебя постоянно оценивает.' },
+    { id: 9, number: 9, title: 'Внуренняя опора', link: 'https://t.me/c/3734713069/18', type: 'podcast', desc: 'Только ты знаешь, как тебе лучше.' },
+    { id: 10, number: 10, title: 'Сила в радости', link: 'https://t.me/c/3734713069/19', type: 'podcast', desc: '' },
+    { id: 11, number: 11, title: 'С чего нужно начать', link: 'https://t.me/c/3734713069/20', type: 'podcast', desc: '' },
+    { id: 12, number: 12, title: 'Что такое Сущность', link: 'https://t.me/c/3734713069/21', type: 'podcast', desc: '' },
+    { id: 13, number: 13, title: 'Медитация сущность', link: 'https://t.me/c/3734713069/23', type: 'meditation', desc: '' },
+    { id: 14, number: 14, title: 'Восстановление после употребления', link: 'https://t.me/c/3734713069/25', type: 'podcast', desc: '' },
+    { id: 15, number: 15, title: 'Медитация: Осознай бесконечность', link: 'https://t.me/c/3734713069/27', type: 'meditation', desc: '' },
+    { id: 16, number: 16, title: 'Не ругай себя за срыв', link: 'https://t.me/c/3734713069/29', type: 'podcast', desc: '' },
+    { id: 17, number: 17, title: 'Моё тело', link: 'https://t.me/c/3734713069/33', type: 'lecture', desc: '' },
+    { id: 18, number: 18, title: 'Возможности нашего тела', link: 'https://t.me/c/3734713069/34', type: 'podcast', desc: 'Осознай, насколько ты уникальный и живой.' },
+    { id: 19, number: 19, title: 'Центринг', link: 'https://t.me/c/3734713069/35', type: 'meditation', desc: '' },
+    { id: 20, number: 20, title: 'Дыхательная техника', link: 'https://t.me/c/3734713069/36', type: 'practice', desc: '' },
+    { id: 21, number: 21, title: 'Интонационно-дыхательная', link: 'https://t.me/c/3734713069/37', type: 'practice', desc: '' },
+    { id: 22, number: 22, title: 'ПМР', link: 'https://t.me/c/3734713069/38', type: 'practice', desc: '' },
+    { id: 23, number: 23, title: 'Контроль мобилизации (поплавок)', link: 'https://t.me/c/3734713069/39', type: 'practice', desc: '' },
+    { id: 24, number: 24, title: 'Как работать с тягой на уровне тела', link: 'https://t.me/c/3734713069/40', type: 'practice', desc: '' },
+    { id: 25, number: 25, title: 'Пробуем понять свою глубину', link: 'https://t.me/c/3734713069/41', type: 'meditation', desc: '' },
+    { id: 26, number: 26, title: 'Психосоматика', link: 'https://t.me/c/3734713069/42', type: 'lecture', desc: '' },
+    { id: 27, number: 30, title: 'Список на чекап', link: 'https://t.me/c/3734713069/46', type: 'material', desc: '' },
+    { id: 28, number: 31, title: 'Наши эмоции', link: 'https://t.me/c/3734713069/50', type: 'lecture', desc: '' },
+    { id: 29, number: 32, title: 'Таблица чувств', link: 'https://t.me/c/3734713069/51', type: 'material', desc: '' },
+    { id: 30, number: 33, title: 'Внутренний ребёнок', link: 'https://t.me/c/3734713069/53', type: 'meditation', desc: '' },
+    { id: 31, number: 34, title: 'Метафорическая история', link: 'https://t.me/c/3734713069/55', type: 'podcast', desc: '' },
+    { id: 32, number: 35, title: 'Запрет на радость', link: 'https://t.me/c/3734713069/56', type: 'podcast', desc: '' },
+    { id: 33, number: 36, title: 'Запрет на грусть', link: 'https://t.me/c/3734713069/57', type: 'podcast', desc: '' },
+    { id: 34, number: 37, title: 'Запрет на злость', link: 'https://t.me/c/3734713069/58', type: 'podcast', desc: '' },
+    { id: 35, number: 38, title: 'Барабаны тайко', link: 'https://t.me/c/3734713069/61', type: 'meditation', desc: '' },
+    { id: 36, number: 39, title: 'Освобождение от гнева. Часть 1', link: 'https://t.me/c/3734713069/62', type: 'meditation', desc: '' },
+    { id: 37, number: 40, title: 'Детские роли в семье', link: 'https://t.me/c/3734713069/63', type: 'material', desc: '' },
+    { id: 38, number: 41, title: 'Освобождение от гнева. Часть 2', link: 'https://t.me/c/3734713069/64', type: 'meditation', desc: '' },
+    { id: 39, number: 42, title: 'Контакт с болью Лойола', link: 'https://t.me/c/3734713069/67', type: 'podcast', desc: '' },
+    { id: 40, number: 43, title: 'Как относиться к боли', link: 'https://t.me/c/3734713069/68', type: 'podcast', desc: '' },
+    { id: 41, number: 44, title: 'Как работать с болью', link: 'https://t.me/c/3734713069/69', type: 'podcast', desc: '' },
+    { id: 42, number: 45, title: 'Как отпускать боль', link: 'https://t.me/c/3734713069/70', type: 'podcast', desc: '' },
+    { id: 43, number: 46, title: 'Ребёнок, с тобой всё нормально', link: 'https://t.me/c/3734713069/72', type: 'meditation', desc: '' },
+    { id: 44, number: 47, title: 'Моя семья', link: 'https://t.me/c/3734713069/75', type: 'lecture', desc: '' },
+    { id: 45, number: 48, title: 'Семейные паттерны', link: 'https://t.me/c/3734713069/76', type: 'lecture', desc: '' },
+    { id: 46, number: 49, title: 'Перенос негатива', link: 'https://t.me/c/3734713069/77', type: 'material', desc: '' },
+    { id: 47, number: 50, title: 'Принятие и сочувствие', link: 'https://t.me/c/3734713069/79', type: 'podcast', desc: '' },
+    { id: 48, number: 51, title: 'Встреча с родителями', link: 'https://t.me/c/3734713069/80', type: 'meditation', desc: '' }
+  ],
+  curated: {
+    start: [1, 4, 5, 9, 17, 28],
+    meditations: [7,13,15,19,25,30,35,36,38,43,48],
+    lectures: [17,26,28,44,45],
+    practices: [20,21,22,23,24],
+    materials: [27,29,37,46]
+  }
+};
