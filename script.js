@@ -156,7 +156,6 @@ function renderHome() {
       ${secondary.map(section => `
         <article class="mini-card clickable" data-view="${escapeHtml(section.id)}">
           <div class="mini-title">${escapeHtml(section.title)}</div>
-          <div class="mini-desc">${escapeHtml(section.description)}</div>
         </article>
       `).join('')}
     </section>
@@ -223,7 +222,7 @@ function renderView() {
   const meta = VIEW_META[state.activeView] || VIEW_META.home;
 
   document.body.className = meta.theme;
-  byId('pageTitle').textContent = meta.title;
+  byId('pageTitle').classList.toggle('is-letter-title', state.activeView === 'home');
   byId('pageSubtitle').textContent = meta.subtitle;
   byId('backBtn').hidden = state.activeView === 'home';
 
