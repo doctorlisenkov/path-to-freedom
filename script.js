@@ -80,8 +80,7 @@ function cardForItem(item) {
   <span class="item-type">${TYPE_LABELS[item.type] || 'Материал'}</span>
 </div>
       <div class="item-title">${escapeHtml(item.title)}</div>
-      ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''}
-      <div class="item-link">Открыть в Telegram</div>
+      ${item.desc ? `<div class="item-desc">${escapeHtml(item.desc)}</div>` : ''} 
     </a>
   `;
 }
